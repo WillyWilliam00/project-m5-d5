@@ -1,11 +1,11 @@
 import SingleComment from "./SingleComment"
 
-export default function CommentList({allComment, asin, setAllComment, setLoading}) {
+export default function CommentList({allComment, getAllComment}) {
     
     return (
         <>
                 {allComment.map((comment, i) => (
-                    <SingleComment setAllComment={setAllComment} setLoading={setLoading} commmentText={comment.comment} commentRate={comment.rate} key={i} commentId={comment._id} asin={asin}/>
+                    <SingleComment getAllComment={getAllComment} commmentText={comment.comment} commentRate={comment.rate} key={i} commentId={comment._id} />
                 ))}
           </>  
     )

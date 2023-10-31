@@ -1,13 +1,18 @@
+import { useContext } from "react";
 import {Row, Col, Container} from "react-bootstrap";
+import ThemeContext from "../Context/theme";
 
 
 function Jumbotron() {
+    const {dark} = useContext(ThemeContext)
+    console.log(dark)
+    
     return (
         <Container className="mt-5 pt-5">
             
                 <div className="jumbotron">
-                    <h1 className="display-4 fw-bolder">EPICBOOKS</h1>
-                    <p className="lead">Esplora mondi infiniti tra le pagine di un libro...</p>
+                    <h1 className={`display-4 fw-bolder ${dark ? "dark-mode" : ""}`}>EPICBOOKS</h1>
+                    <p className={`lead ${dark ? "dark-mode" : ""}`}>Esplora mondi infiniti tra le pagine di un libro...</p>
                     
                     <Row className='d-flex justify-content-center'>
                         <Col xs={12 }sm={6}>
@@ -18,7 +23,7 @@ function Jumbotron() {
                         />
                         </Col>
                         <Col xs={12}sm={6} className='d-flex align-items-end'>
-                        <p>In un mondo dove ogni pagina è una porta segreta verso mondi straordinari, 
+                        <p className={`lead ${dark ? "dark-mode" : ""}`}>In un mondo dove ogni pagina è una porta segreta verso mondi straordinari, 
                             il nostro ecommerce di libri ti offre un viaggio senza fine tra storie coinvolgenti, 
                             saggi illuminanti e avventure epiche. Benvenuto a bordo, esplora e trova 
                             il tuo prossimo grande libro con noi...</p>

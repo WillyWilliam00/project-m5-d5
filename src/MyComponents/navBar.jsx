@@ -1,9 +1,17 @@
-import {Nav, Navbar} from "react-bootstrap";
+import {Nav, Navbar, Button} from "react-bootstrap";
+import ThemeContext from "../Context/theme";
+import { useContext } from "react";
+
 
 
 function MyNavBar({name, setName}) {
+
+  const { dark, setDark } = useContext(ThemeContext);
+ 
+  
   return (
-    <Navbar fixed="top" expand="lg" className="ps-1" bg="dark" data-bs-theme="dark">
+    
+    <Navbar fixed="top" expand="lg" className="ps-1" bg={dark ? "success-subtle" : "info-subtle"} data-bs-theme={dark ? "light" : "dark"}>
       
       <Navbar.Brand href="#home" className='d-flex justify-content-center align-items-center'>
             <img
@@ -23,7 +31,10 @@ function MyNavBar({name, setName}) {
           <label className="ms-auto pe-5" >
                        <input className="input-text" name="TitleName" placeholder="Signore degli Anelli.." value={name} 
                        onChange={(e) => {setName(e.target.value)}}/>
-            </label>
+          </label>
+          <Button className="mx-5" variant={dark ? "light" : "secondary"} onClick={()=> setDark(!dark)}>
+            {dark ? "Light Mode" : "Dark Mode"}
+          </Button>
         </Navbar.Collapse>
       
     </Navbar>

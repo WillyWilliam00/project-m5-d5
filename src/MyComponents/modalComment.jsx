@@ -1,37 +1,48 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import {Button, Modal, Container, Row} from 'react-bootstrap';
 import AddComment from "./addComment"
 import CommentList from "./commentList"
 import { DotSpinner } from '@uiball/loaders'
+import ThemeContext from '../Context/theme';
+
 
 function ModalComment({asin, show, setShow}) {
   
   const handleClose = () =>{setShow(false);};
   const [allComment, setAllComment] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState()
+  const {dark, setDark} = useContext(ThemeContext)
+
+  const getAllComment = useCallback(() =>{ 
+    setLoading(true)
+    fetch(`https://striveschool-api.herokuapp.com/api/comments/${asin}`, {
+    headers: {
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM3YWIzZmU3NDZhMDAwMTQ4MTQzMmEiLCJpYXQiOjE2OTg2ODI5NTQsImV4cCI6MTY5OTg5MjU1NH0.HHBtM4-HlPu0aYhgFK4ucJa0J5WmqpZZFSS5KULk3xo"
+    }})
+    .then(r => r.json())
+    .then(setAllComment)
+    .catch(()=>alert("oh oh"))
+    .finally(()=>setLoading(false))}, [asin])
   
     useEffect(() => {
 
-        fetch(`https://striveschool-api.herokuapp.com/api/comments/${asin}`, {
-        headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM3YWIzZmU3NDZhMDAwMTQ4MTQzMmEiLCJpYXQiOjE2OTg2ODI5NTQsImV4cCI6MTY5OTg5MjU1NH0.HHBtM4-HlPu0aYhgFK4ucJa0J5WmqpZZFSS5KULk3xo"
-        }})
-        .then(r => r.json())
-        .then(setAllComment)
-        .catch(()=>alert("oh oh"))
-        .finally(()=>setLoading(false))
+        getAllComment()
         
-    },[asin])
-    console.log(allComment)
+    },[getAllComment])
+    
  
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Recensioni</Modal.Title>
+      <Modal show={show} onHide={handleClose} >
+        <Modal.Header closeButton className= {dark ? "bg-dark" : ""}>
+          <Modal.Title className={dark ? "dark-mode" : ""}>Recensioni
+          <Button className="mx-5" variant={dark ? "light" : "secondary"} onClick={()=> setDark(!dark)}>
+            {dark ? "Light Mode" : "Dark Mode"}
+          </Button>
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body className= {dark ? "bg-dark" : ""}>
         <Container style={{borderBottom: "2px solid black"}}>
           <Row style={{height: 400, overflow: "auto"}}>
           { loading && <DotSpinner 
@@ -41,14 +52,14 @@ function ModalComment({asin, show, setShow}) {
                   color="black" 
                   
               /> }
-              {!loading &&<CommentList allComment={allComment} setAllComment={setAllComment} setLoading={setLoading} asin={asin}/>}
+              {!loading &&<CommentList getAllComment={getAllComment} allComment={allComment}/>}
           </Row>            
         </Container> 
         <Container style={{paddingTop: "10px"}}>
-                <AddComment asin={asin} setAllComment={setAllComment} setLoading={setLoading}/> 
+                <AddComment asin={asin} getAllComment={getAllComment}/> 
         </Container>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className= {dark ? "bg-dark" : ""}>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
