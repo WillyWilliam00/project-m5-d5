@@ -38,17 +38,18 @@ function ModalComment({ asin, show, setShow }) {
         <Modal.Header closeButton className={dark ? "bg-dark" : ""}>
           <Button
             className="me-5"
-            variant={dark ? "light" : "secondary"}
+            style={{padding: "3px 10px 5px 10px"}}
+            variant={dark ? "primary" : "secondary"}
             onClick={() => setDark(!dark)}
           >
-            {dark ? <BrightnessHighFill /> : <MoonFill />}
+            {dark ? <BrightnessHighFill style={{color: "yellow"}} /> : <MoonFill />}
           </Button>
           <Modal.Title className={dark ? "dark-mode" : ""}>
             Recensioni
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className={dark ? "bg-dark" : ""}>
-          <Container style={{ borderBottom: "2px solid black" }}>
+          <Container style={{ borderBottom: "2px solid lightgrey" }}>
             <Row style={{ height: 400, overflow: "auto" }}>
               {loading && (
                 <DotSpinner

@@ -45,10 +45,11 @@ function MyNavBar({ name, setName }) {
         </label>
         <Button
           className="mx-5"
-          variant={dark ? "light" : "secondary"}
+          style={{padding: "3px 10px 5px 10px"}}
+          variant={dark ? "primary" : "secondary"}
           onClick={() => setDark(!dark)}
         >
-          {dark ? <BrightnessHighFill /> : <MoonFill />}
+          {dark ? <BrightnessHighFill style={{color: "yellow"}} /> : <MoonFill />}
         </Button>
       </Navbar.Collapse>
     </Navbar>

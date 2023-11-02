@@ -53,7 +53,7 @@ function AddComment({asin, getAllComment}) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h4>Inserisci una recensione!</h4>
+      <h4 className={dark ? "dark-mode" : ""}>Inserisci una recensione!</h4>
       <Form.Group className="mb-3 mt-2" controlId="text">
         <Form.Label className={dark ? "dark-mode" : ""}>Cosa ne pensi?</Form.Label>
         <Form.Control type="text" placeholder="Scrivi la tua recensione" required value={text} onChange={(e)=> setText(e.target.value)}/>
