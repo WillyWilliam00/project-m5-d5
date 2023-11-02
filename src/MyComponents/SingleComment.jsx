@@ -3,13 +3,8 @@ import { Col, Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import ThemeContext from "../Context/theme";
 
-export default function SingleComment({
-  commmentText,
-  commentRate,
-  commentId,
-  getAllComment,
-}) {
-  const { dark } = useContext(ThemeContext);
+export default function SingleComment({ getAllComment, ...comment }){
+const { dark } = useContext(ThemeContext);
 
   // function GetComment(){
   //     setLoading(true)
@@ -24,7 +19,7 @@ export default function SingleComment({
   //   }
 
   const deleteComment = () => {
-    fetch(`https://striveschool-api.herokuapp.com/api/comments/${commentId}`, {
+    fetch(`https://striveschool-api.herokuapp.com/api/comments/${comment.commentId}`, {
       headers: {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM3YWIzZmU3NDZhMDAwMTQ4MTQzMmEiLCJpYXQiOjE2OTg2ODI5NTQsImV4cCI6MTY5OTg5MjU1NH0.HHBtM4-HlPu0aYhgFK4ucJa0J5WmqpZZFSS5KULk3xo",
@@ -57,7 +52,7 @@ export default function SingleComment({
               Rating:
             </span>
             <p className={`m-0 fw-bolder ${dark ? "text-light" : ""}`}>
-              {commentRate}
+              {comment.commentRate}
             </p>
           </div>
           <div>
@@ -74,7 +69,7 @@ export default function SingleComment({
               }}
               className={`my-3 ps-2 ${dark ? "text-light" : ""}`}
             >
-              {commmentText}
+              {comment.commmentText}
             </p>
           </div>
         </Col>

@@ -22,7 +22,7 @@ function App() {
           <Jumbotron />
           
           
-          <TableBook name={name} setName={setName} />
+          <TableBook name={name}/>
           
           
           <Footer />

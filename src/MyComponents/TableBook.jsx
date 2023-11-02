@@ -3,7 +3,7 @@ import fantasy from "../books/fantasy.json"
 import SingleBook from "./SingleBook";
 
 
-export default function TableBook({name, setName}) {
+export default function TableBook({name}) {
     const usingQuery = book => book.title.toLowerCase().includes(name.toLowerCase())
 
 

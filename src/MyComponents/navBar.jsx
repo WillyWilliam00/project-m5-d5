@@ -8,9 +8,10 @@ function MyNavBar({ name, setName }) {
 
   return (
     <Navbar
-      fixed="top"
+      sticky="top"
       expand="lg"
       className="ps-1"
+      style={{opacity: ".9"}}
       bg={dark ? "success-subtle" : "info-subtle"}
       data-bs-theme={dark ? "light" : "dark"}
     >

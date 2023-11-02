@@ -7,9 +7,7 @@ import ThemeContext from "../Context/theme";
 import { MoonFill, BrightnessHighFill } from "react-bootstrap-icons";
 
 function ModalComment({ asin, show, setShow }) {
-  const handleClose = () => {
-    setShow(false);
-  };
+  const handleClose = () => {setShow(false)}
   const [allComment, setAllComment] = useState([]);
   const [loading, setLoading] = useState();
   const { dark, setDark } = useContext(ThemeContext);

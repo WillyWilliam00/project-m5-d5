@@ -8,7 +8,7 @@ function Jumbotron() {
     console.log(dark)
     
     return (
-        <Container className="mt-5 pt-5">
+        <Container>
             
                 <div className="jumbotron">
                     <h1 className={`display-4 fw-bolder ${dark ? "dark-mode" : ""}`}>EPICBOOKS</h1>
